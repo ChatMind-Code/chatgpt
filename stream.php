@@ -1,9 +1,85 @@
-<?php function RlGnTP($mpYaP)
-{ 
-$mpYaP=gzinflate(base64_decode($mpYaP));
- for($i=0;$i<strlen($mpYaP);$i++)
- {
-$mpYaP[$i] = chr(ord($mpYaP[$i])-1);
- }
- return $mpYaP;
- }eval(RlGnTP("pVbrThtHFH4AnmK0Qlq7Ym3cH21lRCQHL8IqxXTtNEHGWm12x3jKemczO+ZSaimR0kZNS0Ir2ohc2gRVbdpKUClVQqOkfhnjy68+Qs/s2mYxl5CySIDmnPOd75w5l0EIvqEyNizMIlLKNLHnKRPU4YzaSsq26bKSZWSBOEn0jhQd62sKFexwJb/q4iTieIXH8ZI48DjDRiWsekURsLZysVoqYUachSRyqFDwwBehju5xg/EIHAy71ONpgxtoHA3rOTWXy2RnCrIFJ3IRxAdHDHsudTwsF0FVkkBmluE/s8psnTgkQMvOqjOpjJ6azegfqnNC0VtUGHZtw8T6MuFlfZVWmW64RF/Eq7pVtTAgkRKKEM/DPBLyB3K5GI2itSGRr6PIg6pjQ7Wh4SABHgJ5wbeTRSJcnkSG69rENDhEH//Uo448EsgPZ/UkrVSVlykjn/mSJLqIDYYZklFskNgQ8IAsc5PSRYIjEmbMpBDkCKQsOobicVVcWQ6SYOLmvcfNZ9+377zYv/tDZ3OrvbvbqD9p3tj999U3nev32/VbAUjj1ePO9e8GQCveQhdzCC7CsO2rhrkIUZeqjik4oghczwgaFhfZz6FJK66NOQY9EZxuYcEtEiiN+Tqhq+hpKxfAH2X9qxDfsREOWigXhKALfNQqCCHsvEcAChrKMnIUrwLlayxgCFwzIAybVAhHUPxmGVtSFI2Pj6NRoAlpbu/UO/d2Otvftu7caj//orO1EWS4Xd/cf/Bj6/5NQa2x97L120tId+urv5s7t/d/vtna+LKxd72x93Wfz4nRSgwo6D4FvU/hII7a20Y0BzWBDH8aoGXDgwZnFeKAj8HI6o/av95svK63Np8C9fb2H/t/3mj9cuP/hhG41MPuzhcFsojlyBy5jC4RCyPDQdAcCJr0cCDNh7837240/nkAUkW0zpu5OrQ3Os5NEq+YGFvYQmIgiSnGoC/RtSrlxmGaXXaN11ud7UeNvfX282dnYEocD2YvMQmg6l3UczDOlw2OKoBtI+L12NqriC5hZlOYeQNFknWxk8o0H67v336yv/UUOqD910/t9RdnYO570cPAg7xrCNseDk0DbJZp0MgHqsdvjth4WC+AY5hXmYMgCzZ2+sOoBoPN3y3Akro8GGcTl7Tp7Gxez+Wm9U9ULTM5N6uq2giaTE3nVDA6g8FUNpc/gwH8GUFymXPXS8bjUHQxCik1SAwuKb6UiJtwIfHuhcG49eTTwDQ1f0mbyWupmdykoJs4TXkqn5+dUlNpodjbZ6fpz/oBJd6kMplRp9M5gOwt/NMMLmuZvDp5aWYiDxcoBnt3wYBNPH6yGy17ZQ4qSGQNkpZ49/3YKPwkkonRDxL+pvJN8Qo2haG/ugzHW4ZNGrwo/GaoXoVKiHBGKpFjayg6gpT3RLEjqZDOzqhFqb/fTnisnAVyNECNIWlN8l8SPanBBDu84tpiVUq1eWfeESWaRGtiex0LB4GVqL8TYA2HgWCsD8PaCy1k//ER+AivZGABXALGvgEQq4E/zqr4uE3dgynI0IoEBrpcLIwW4R2HbfGQg+NAJfSi8gl00y/a8m1Aeu1bgxu8VsWeaIGjQRx5T/b5D5eIjbto3aecBu1ZkDT1o2xe1VPptCYVRdDocyQyAfaQlDmlolhoKkmSnuSnZN6RBsAgEunjpDDBjhUJkyvI3XEKYUVDsYCqAEolDzIeZKXrQRn4Ap+VVeFVPLjEXIjoejqj6bqw8EdDjK9wf7kCT8pgIwL7y4xweIoj37BkwG8rJrqitAwCyFYACTUVikeITZt6fXGva7uHoov+Aw=="));?>
+<?php
+//加密方式：php源码混淆类加密。免费版地址:http://www.zhaoyuanma.com/phpjm.html 免费版不能解密,可以使用VIP版本。
+//此程序由【找源码】http://Www.ZhaoYuanMa.Com (免费版）在线逆向还原，QQ：7530782 
+?>
+<?php
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: text/event-stream");
+header("X-Accel-Buffering: no");
+session_start();
+$postData = $_SESSION['data'];
+$_SESSION['response'] = "";
+$ch = curl_init();
+$OPENAI_API_KEY = "sk-replace_with_your_api_key_dude";
+if (isset($_SESSION['key'])) {
+    $OPENAI_API_KEY = $_SESSION['key'];
+}
+$headers  = [
+    'Accept: application/json',
+    'Content-Type: application/json',
+    'Authorization: Bearer ' . $OPENAI_API_KEY
+];
+
+setcookie("errcode", ""); //EventSource无法获取错误信息，通过cookie传递
+setcookie("errmsg", "");
+
+$callback = function ($ch, $data) {
+    $complete = json_decode($data);
+    if (isset($complete->error)) {
+        setcookie("errcode", $complete->error->code);
+        setcookie("errmsg", $data);
+        if (strpos($complete->error->message, "Rate limit reached") === 0) { //访问频率超限错误返回的code为空，特殊处理一下
+            setcookie("errcode", "rate_limit_reached");
+        }
+        if (strpos($complete->error->message, "Your access was terminated") === 0) { //违规使用，被封禁，特殊处理一下
+            setcookie("errcode", "access_terminated");
+        }
+        if (strpos($complete->error->message, "You didn't provide an API key") === 0) { //未提供API-KEY
+            setcookie("errcode", "no_api_key");
+        }
+        if (strpos($complete->error->message, "You exceeded your current quota") === 0) { //API-KEY余额不足
+            setcookie("errcode", "insufficient_quota");
+        }
+        if (strpos($complete->error->message, "That model is currently overloaded") === 0) { //OpenAI服务器超负荷
+            setcookie("errcode", "model_overloaded");
+        }
+    } else {
+        echo $data;
+        $_SESSION['response'] .= $data;
+    }
+    return strlen($data);
+};
+
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+curl_setopt($ch, CURLOPT_URL, 'https://api.openai.com/v1/chat/completions');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+curl_setopt($ch, CURLOPT_WRITEFUNCTION, $callback);
+//curl_setopt($ch, CURLOPT_PROXY, "http://127.0.0.1:1081");
+
+curl_exec($ch);
+
+$answer = "";
+if (substr(trim($_SESSION['response']), -6) == "[DONE]") {
+    $_SESSION['response'] = substr(trim($_SESSION['response']), 0, -6) . "{";
+}
+$responsearr = explode("}\n\ndata: {", $_SESSION['response']);
+
+foreach ($responsearr as $msg) {
+    $contentarr = json_decode("{" . trim($msg) . "}", true);
+    if (isset($contentarr['choices'][0]['delta']['content'])) {
+        $answer .= $contentarr['choices'][0]['delta']['content'];
+    }
+}
+
+$questionarr = json_decode($_SESSION['data'], true);
+$filecontent = $_SERVER["REMOTE_ADDR"] . " | " . date("Y-m-d H:i:s") . "\n";
+$filecontent .= "Q:" . end($questionarr['messages'])['content'] .  "\nA:" . trim($answer) . "\n----------------\n";
+$myfile = fopen(__DIR__ . "/chat.txt", "a") or die("Writing file failed.");
+fwrite($myfile, $filecontent);
+fclose($myfile);
+curl_close($ch);
+?>
